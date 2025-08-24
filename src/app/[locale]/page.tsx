@@ -1,10 +1,10 @@
+import Footer from "./components/Footer";
 import LocaleSwitcherSelect from "./components/LocaleSwitcherSelect";
 import { ModeToggle } from "./components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { CircleChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Footer from "./components/Footer";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");

@@ -38,8 +38,7 @@ export async function generateMetadata({
     title: locale === "ar" ? "تطبيق نكست" : "Create Next App",
   };
 }
-
-// eslint-disable-next-line unicorn/prevent-abbreviations
+ 
 export const generateStaticParams = async () => {
   return routing.locales.map((locale) => ({
     locale,

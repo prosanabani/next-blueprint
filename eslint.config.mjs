@@ -4,23 +4,23 @@ import tseslint from "typescript-eslint";
 import parser from "@typescript-eslint/parser";
 import auto from "eslint-config-canonical/auto";
 import sonar from "eslint-plugin-sonarjs";
-import tailwind from "eslint-plugin-tailwindcss";
+// import tailwind from "eslint-plugin-tailwindcss";
 import reactPlugin from "eslint-plugin-react";
 import pluginQuery from "@tanstack/eslint-plugin-query";
-// import nextjs from "@next/eslint-plugin-next";
+import nextjs from "@next/eslint-plugin-next";
 
 export default tseslint.config(
   // Base Next.js recommended config
   {
     files: ["**/*.{ts,tsx}"],
-    // plugins: {
-    //   "@next/next": nextjs,
-    // },
-    // rules: {
-    //   ...nextjs.configs.recommended.rules,
-    //   ...nextjs.configs["core-web-vitals"].rules,
-    //   "@next/next/no-html-link-for-pages": ["error", "app/"], // Adjust if using pages directory
-    // },
+    plugins: {
+      "@next/next": nextjs,
+    },
+    rules: {
+      ...nextjs.configs.recommended.rules,
+      ...nextjs.configs["core-web-vitals"].rules,
+      "@next/next/no-html-link-for-pages": ["error", "src/app/"], // Adjust if using pages directory
+    },
   },
 
   // Canonical config with react-hooks removed
@@ -46,6 +46,7 @@ export default tseslint.config(
       "**/unimport.d.ts",
       ".next/**",
       "node_modules/**",
+      "src/components/ui/**",
       // "**/scripts/sort-untranslated.js",
     ],
   },
@@ -56,7 +57,7 @@ export default tseslint.config(
       reactPlugin.configs.flat.recommended,
       ...tseslint.configs.recommended,
       ...tseslint.configs.strict,
-      ...tailwind.configs["flat/recommended"],
+      // ...tailwind.configs["flat/recommended"],
       sonar.configs.recommended,
     ],
     files: ["**/*.{ts,tsx}"],
@@ -82,16 +83,34 @@ export default tseslint.config(
       ],
       "unicorn/prefer-string-replace-all": "off",
 
-      "tailwindcss/no-custom-classname": "off",
-      "tailwindcss/classnames-order": "warn",
-      "tailwindcss/enforces-negative-arbitrary-values": "warn",
-      "tailwindcss/enforces-shorthand": "warn",
-      "tailwindcss/migration-from-tailwind-2": "warn",
+      // "tailwindcss/no-custom-classname": "off",
+      // "tailwindcss/classnames-order": "warn",
+      // "tailwindcss/enforces-negative-arbitrary-values": "warn",
+      // "tailwindcss/enforces-shorthand": "warn",
+      // "tailwindcss/migration-from-tailwind-2": "warn",
       // 'tailwindcss/no-arbitrary-value': 'warn',
-      "tailwindcss/no-contradicting-classname": "warn",
-      "tailwindcss/no-unnecessary-arbitrary-value": "warn",
+      // "tailwindcss/no-contradicting-classname": "warn",
+      // "tailwindcss/no-unnecessary-arbitrary-value": "warn",
       // 'no-unused-vars': 'off',
+      "unicorn/prevent-abbreviations": "off",
       curly: "off",
+      "no-restricted-imports": [
+        "error",
+        {
+          name: "next/link",
+          message: "Please import from `@/i18n/navigation` instead.",
+        },
+        {
+          name: "next/navigation",
+          importNames: [
+            "redirect",
+            "permanentRedirect",
+            "useRouter",
+            "usePathname",
+          ],
+          message: "Please import from `@/i18n/navigation` instead.",
+        },
+      ],
 
       "@tanstack/query/mutation-property-order": "off",
 
@@ -101,6 +120,7 @@ export default tseslint.config(
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react-hooks/react-compiler": "error",
+      "react/no-array-index-key": "off",
       // Note: you must disable the base rule as it can report incorrect errors
       "no-unused-expressions": "off",
       "@typescript-eslint/no-unused-expressions": "error",
