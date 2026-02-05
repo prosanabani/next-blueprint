@@ -137,75 +137,87 @@ html {
 
 /* Light mode – page background, body text, and base surfaces */
 :root {
-  --radius: 0.65rem; /* default border radius for components */
+  --radius: 0.625rem; /* default border radius for components */
   --background: oklch(1 0 0); /* page background */
-  --foreground: oklch(0.141 0.005 285.823); /* body text, headings */
+  --foreground: oklch(0.145 0 0); /* body text, headings */
   --card: oklch(1 0 0); /* card, panel, sheet backgrounds */
-  --card-foreground: oklch(0.141 0.005 285.823); /* text on cards */
+  --card-foreground: oklch(0.145 0 0); /* text on cards */
   --popover: oklch(1 0 0); /* dropdown, popover, tooltip backgrounds */
-  --popover-foreground: oklch(0.141 0.005 285.823); /* text in popovers */
-  --primary: oklch(0.623 0.214 259.815); /* primary buttons, links, brand actions */
-  --primary-gray: oklch(0.6428 0.0152 248.06); /* gray used with primary (e.g. badges) */
-  --primary-foreground: oklch(0.97 0.014 254.604); /* text on primary buttons */
-  --secondary: oklch(0.967 0.001 286.375); /* secondary buttons, subtle backgrounds */
-  --secondary-foreground: oklch(0.21 0.006 285.885); /* text on secondary */
-  --muted: oklch(0.967 0.001 286.375); /* muted backgrounds (table stripes, disabled areas) */
-  --muted-foreground: oklch(0.552 0.016 285.938); /* placeholder, captions, helper text */
-  --accent: oklch(0.967 0.001 286.375); /* hover/active states, selected list items */
-  --accent-foreground: oklch(0.21 0.006 285.885); /* text on accent (e.g. menu hover) */
-  --destructive: oklch(0.577 0.245 27.325); /* delete, danger buttons, error states */
-  --border: oklch(0.92 0.004 286.32); /* borders, dividers */
-  --input: oklch(0.92 0.004 286.32); /* input borders, form field outlines */
-  --ring: oklch(0.623 0.214 259.815); /* focus ring (outline) color */
+  --popover-foreground: oklch(0.145 0 0); /* text in popovers */
+  --primary: oklch(0.205 0 0); /* primary buttons, links, brand actions */
+  --primary-gray: oklch(
+    0.6428 0.0152 248.06
+  ); /* gray used with primary (e.g. badges) */
+  --primary-foreground: oklch(0.985 0 0); /* text on primary buttons */
+  --secondary: oklch(0.97 0 0); /* secondary buttons, subtle backgrounds */
+  --secondary-foreground: oklch(0.205 0 0); /* text on secondary */
+  --muted: oklch(
+    0.97 0 0
+  ); /* muted backgrounds (table stripes, disabled areas) */
+  --muted-foreground: oklch(0.556 0 0); /* placeholder, captions, helper text */
+  --accent: oklch(0.97 0 0); /* hover/active states, selected list items */
+  --accent-foreground: oklch(0.205 0 0); /* text on accent (e.g. menu hover) */
+  --destructive: oklch(
+    0.577 0.245 27.325
+  ); /* delete, danger buttons, error states */
+  --border: oklch(0.922 0 0); /* borders, dividers */
+  --input: oklch(0.922 0 0); /* input borders, form field outlines */
+  --ring: oklch(0.708 0 0); /* focus ring (outline) color */
   --chart-1: oklch(0.646 0.222 41.116); /* chart/data viz series 1 */
   --chart-2: oklch(0.6 0.118 184.704); /* chart series 2 */
   --chart-3: oklch(0.398 0.07 227.392); /* chart series 3 */
   --chart-4: oklch(0.828 0.189 84.429); /* chart series 4 */
   --chart-5: oklch(0.769 0.188 70.08); /* chart series 5 */
   --sidebar: oklch(0.985 0 0); /* sidebar/navigation background */
-  --sidebar-foreground: oklch(0.141 0.005 285.823); /* sidebar text */
-  --sidebar-primary: oklch(0.623 0.214 259.815); /* sidebar active/selected item */
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604); /* text on sidebar primary */
-  --sidebar-accent: oklch(0.967 0.001 286.375); /* sidebar hover state */
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885); /* text on sidebar accent */
-  --sidebar-border: oklch(0.92 0.004 286.32); /* sidebar dividers */
-  --sidebar-ring: oklch(0.623 0.214 259.815); /* sidebar focus ring */
+  --sidebar-foreground: oklch(0.145 0 0); /* sidebar text */
+  --sidebar-primary: oklch(0.205 0 0); /* sidebar active/selected item */
+  --sidebar-primary-foreground: oklch(0.985 0 0); /* text on sidebar primary */
+  --sidebar-accent: oklch(0.97 0 0); /* sidebar hover state */
+  --sidebar-accent-foreground: oklch(0.205 0 0); /* text on sidebar accent */
+  --sidebar-border: oklch(0.922 0 0); /* sidebar dividers */
+  --sidebar-ring: oklch(0.708 0 0); /* sidebar focus ring */
 }
 
 /* Dark mode – same roles as light, tuned for dark backgrounds */
 .dark {
-  --background: oklch(0.141 0.005 285.823); /* page background */
+  --background: oklch(0.145 0 0); /* page background */
   --foreground: oklch(0.985 0 0); /* body text, headings */
-  --card: oklch(0.21 0.006 285.885); /* card, panel, sheet backgrounds */
+  --card: oklch(0.205 0 0); /* card, panel, sheet backgrounds */
   --card-foreground: oklch(0.985 0 0); /* text on cards */
-  --popover: oklch(0.21 0.006 285.885); /* dropdown, popover, tooltip backgrounds */
+  --popover: oklch(0.269 0 0); /* dropdown, popover, tooltip backgrounds */
   --popover-foreground: oklch(0.985 0 0); /* text in popovers */
-  --primary: oklch(0.546 0.245 262.881); /* primary buttons, links, brand actions */
+  --primary: oklch(0.922 0 0); /* primary buttons, links, brand actions */
   --primary-gray: hsl(210, 11%, 40%); /* gray used with primary (e.g. badges) */
-  --primary-foreground: oklch(0.379 0.146 265.522); /* text on primary buttons */
-  --secondary: oklch(0.274 0.006 286.033); /* secondary buttons, subtle backgrounds */
+  --primary-foreground: oklch(0.205 0 0); /* text on primary buttons */
+  --secondary: oklch(0.269 0 0); /* secondary buttons, subtle backgrounds */
   --secondary-foreground: oklch(0.985 0 0); /* text on secondary */
-  --muted: oklch(0.274 0.006 286.033); /* muted backgrounds (table stripes, disabled areas) */
-  --muted-foreground: oklch(0.705 0.015 286.067); /* placeholder, captions, helper text */
-  --accent: oklch(0.274 0.006 286.033); /* hover/active states, selected list items */
+  --muted: oklch(
+    0.269 0 0
+  ); /* muted backgrounds (table stripes, disabled areas) */
+  --muted-foreground: oklch(0.708 0 0); /* placeholder, captions, helper text */
+  --accent: oklch(0.371 0 0); /* hover/active states, selected list items */
   --accent-foreground: oklch(0.985 0 0); /* text on accent (e.g. menu hover) */
-  --destructive: oklch(0.704 0.191 22.216); /* delete, danger buttons, error states */
+  --destructive: oklch(
+    0.704 0.191 22.216
+  ); /* delete, danger buttons, error states */
   --border: oklch(1 0 0 / 10%); /* borders, dividers */
   --input: oklch(1 0 0 / 15%); /* input borders, form field outlines */
-  --ring: oklch(0.488 0.243 264.376); /* focus ring (outline) color */
+  --ring: oklch(0.556 0 0); /* focus ring (outline) color */
   --chart-1: oklch(0.488 0.243 264.376); /* chart/data viz series 1 */
   --chart-2: oklch(0.696 0.17 162.48); /* chart series 2 */
   --chart-3: oklch(0.769 0.188 70.08); /* chart series 3 */
   --chart-4: oklch(0.627 0.265 303.9); /* chart series 4 */
   --chart-5: oklch(0.645 0.246 16.439); /* chart series 5 */
-  --sidebar: oklch(0.21 0.006 285.885); /* sidebar/navigation background */
+  --sidebar: oklch(0.205 0 0); /* sidebar/navigation background */
   --sidebar-foreground: oklch(0.985 0 0); /* sidebar text */
-  --sidebar-primary: oklch(0.546 0.245 262.881); /* sidebar active/selected item */
-  --sidebar-primary-foreground: oklch(0.379 0.146 265.522); /* text on sidebar primary */
-  --sidebar-accent: oklch(0.274 0.006 286.033); /* sidebar hover state */
+  --sidebar-primary: oklch(
+    0.488 0.243 264.376
+  ); /* sidebar active/selected item */
+  --sidebar-primary-foreground: oklch(0.985 0 0); /* text on sidebar primary */
+  --sidebar-accent: oklch(0.269 0 0); /* sidebar hover state */
   --sidebar-accent-foreground: oklch(0.985 0 0); /* text on sidebar accent */
   --sidebar-border: oklch(1 0 0 / 10%); /* sidebar dividers */
-  --sidebar-ring: oklch(0.488 0.243 264.376); /* sidebar focus ring */
+  --sidebar-ring: oklch(0.439 0 0); /* sidebar focus ring */
 }
 
 @layer base {
@@ -214,6 +226,10 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* RTL: use Noto Sans Arabic when direction is right-to-left */
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic), var(--font-roboto), sans-serif;
   }
 }
 
