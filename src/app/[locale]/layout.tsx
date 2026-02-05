@@ -1,30 +1,21 @@
 import Footer from "./components/Footer";
+import { LocaleDocumentAttributes } from "./components/LocaleDocumentAttributes";
 import Nav from "./components/Nav";
+import { DirectionProvider } from "@/components/ui/direction";
 import { siteName, siteTagline, siteUrl } from "@/config/site";
-import "../../styles/globals.css";
 import { routing } from "@/i18n/routing";
 import { buildWebSiteJsonLd, canonicalUrl } from "@/lib/seo";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { Geist, Geist_Mono, Roboto } from "next/font/google";
+import { Noto_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 
-const roboto = Roboto({
+const notoSansArabic = Noto_Sans_Arabic({
   display: "swap",
-  subsets: ["latin"],
-  variable: "--font-roboto",
-  weight: ["300", "400", "500", "700"],
-});
-
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+  subsets: ["arabic"],
+  variable: "--font-arabic",
 });
 
 /**
@@ -93,27 +84,28 @@ export default async function LocaleLayout({
   }
 
   const jsonLd = buildWebSiteJsonLd(locale);
+  const fontClassName =
+    locale === "ar" ? notoSansArabic.className : GeistSans.className;
 
   return (
-    <html
-      className={roboto.variable}
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      lang={locale}
-      suppressHydrationWarning
-    >
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* JSON-LD for SEO: WebSite schema (valid in body per spec). */}
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          type="application/ld+json"
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-          enableSystem
-        >
+    <>
+      <LocaleDocumentAttributes
+        fontClassName={fontClassName}
+        locale={locale}
+      />
+      {/* JSON-LD for SEO: WebSite schema (valid in body per spec). */}
+      <script
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        type="application/ld+json"
+      />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        disableTransitionOnChange
+        enableSystem
+      >
+        <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
           <NextIntlClientProvider>
             <div className="flex min-h-screen flex-col">
               <Nav />
@@ -121,8 +113,8 @@ export default async function LocaleLayout({
               <Footer />
             </div>
           </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+        </DirectionProvider>
+      </ThemeProvider>
+    </>
   );
 }

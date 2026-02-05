@@ -51,5 +51,33 @@
   "ThemeToggler": {
     "Turn light": "Light mode",
     "Turn dark": "Dark mode"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "This page doesn't exist or was moved. Check the address or head back home.",
+    "goToHomepage": "Go to Homepage",
+    "goBack": "Go Back",
+    "tryTheseInstead": "Try these instead:",
+    "quickLinksAriaLabel": "Quick links",
+    "about": "About",
+    "destinations": "Destinations",
+    "seo": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist."
+    }
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred while loading this page. Please try again or return to the homepage.",
+    "tryAgain": "Try again",
+    "goToHomepage": "Go to Homepage"
+  },
+  "GlobalError": {
+    "title": "Server Error",
+    "description": "Something went wrong on our end. We're working to fix this. Please try again later.",
+    "tryAgain": "Try Again",
+    "goToHomepage": "Go to Homepage",
+    "contactSupport": "If the problem persists, please contact support.",
+    "errorId": "Error ID"
   }
 }
