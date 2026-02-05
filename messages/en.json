@@ -1,8 +1,52 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page",
+    "title": "Starter Template",
+    "metaTitle": "Starter Template — Next.js with SSG, SEO & i18n",
+    "metaDescription": "A Next.js starter template with static generation, SEO metadata, JSON-LD, and internationalization. Ready to customize.",
+    "tagline": "A Next.js starter with SSG, SEO, and i18n — ready to customize.",
+    "about": "About",
+    "ctaDestinations": "Explore destinations",
+    "introHeading": "Welcome",
+    "introBody": "This starter demonstrates SSG (static site generation), SEO with metadata and JSON-LD, and a simple i18n setup. Use it as a blueprint for your next project.",
     "language": "Language"
+  },
+  "Nav": {
+    "ariaLabel": "Main navigation",
+    "home": "Starter Template",
+    "about": "About",
+    "destinations": "Destinations"
+  },
+  "Footer": {
+    "copyright": "Starter Template. All rights reserved.",
+    "about": "About",
+    "destinations": "Destinations"
+  },
+  "AboutPage": {
+    "metaTitle": "About",
+    "metaDescription": "Learn about this starter template and how to use it for your project.",
+    "title": "About",
+    "body1": "This is a starter template and example site. It showcases static generation (SSG), SEO best practices, and internationalization.",
+    "body2": "Use this blueprint to create your own apps with proper metadata, sitemaps, and accessibility in mind."
+  },
+  "DestinationsPage": {
+    "metaTitle": "Destinations",
+    "metaDescription": "Explore example destinations — sample content for the starter template.",
+    "title": "Destinations",
+    "subtitle": "Example places. Click a destination for more details.",
+    "destinations": {
+      "penang": {
+        "name": "Penang",
+        "description": "Island of heritage, street food, and beaches. George Town UNESCO site and vibrant culture."
+      },
+      "langkawi": {
+        "name": "Langkawi",
+        "description": "Archipelago of 99 islands. Beaches, cable car, and duty-free shopping."
+      },
+      "kualalumpur": {
+        "name": "Kuala Lumpur",
+        "description": "Capital city with Petronas Towers, diverse food, and modern and historic mix."
+      }
+    }
   },
   "ThemeToggler": {
     "Turn light": "Light mode",
