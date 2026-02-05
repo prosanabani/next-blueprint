@@ -10,26 +10,25 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 import nextjs from "@next/eslint-plugin-next";
 
 export default tseslint.config(
-  // Base Next.js recommended config
+  // Next.js flat config (so Next detects the plugin)
+  nextjs.flatConfig.recommended,
+  nextjs.flatConfig.coreWebVitals,
   {
     files: ["**/*.{ts,tsx}"],
-    plugins: {
-      "@next/next": nextjs,
-    },
     rules: {
-      ...nextjs.configs.recommended.rules,
-      ...nextjs.configs["core-web-vitals"].rules,
-      "@next/next/no-html-link-for-pages": ["error", "src/app/"], // Adjust if using pages directory
+      "@next/next/no-html-link-for-pages": ["error", "src/app/"],
     },
   },
 
-  // Canonical config with react-hooks removed
+  // Canonical config: remove react-hooks and @typescript-eslint to avoid redefining plugins
   auto.map((config) => {
-    if (config.plugins && config.plugins["react-hooks"]) {
-      const { ["react-hooks"]: _, ...rest } = config.plugins;
-      return { ...config, plugins: rest };
-    }
-    return config;
+    if (!config.plugins) return config;
+    const {
+      "react-hooks": _rh,
+      "@typescript-eslint": _ts,
+      ...rest
+    } = config.plugins;
+    return { ...config, plugins: rest };
   }),
 
   // TanStack Query config
@@ -142,11 +141,13 @@ export default tseslint.config(
       "sonarjs/no-nested-conditional": "off",
       "sonarjs/pseudo-random": "off",
       "sonarjs/todo-tag": "warn",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/prevent-abbreviations": "off",
     },
     settings: {
       react: {
         version: "detect",
       },
     },
-  }
+  },
 );
