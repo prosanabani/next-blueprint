@@ -1,14 +1,43 @@
-import Icon from "./Icon";
-import VercelLogo from "~icons/logos/vercel.jsx";
+"use client";
 
-const Footer = () => {
+import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
+import { ModeToggle } from "./ModeToggle";
+/**
+ * Site footer: copyright, optional links, theme/locale toggles.
+ */
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+
+export default function Footer() {
+  const t = useTranslations("Footer");
+  const year = new Date().getFullYear();
+
   return (
-    <div className="w-20 h-20 bg-red-700">
-      <Icon height="25" icon="ic:round-facebook" width="25" />
-      testing
-      <VercelLogo fill="currentColor" height={16} width={72} />
-    </div>
+    <footer
+      className="mt-auto border-t border-border bg-muted/30 px-4 py-6"
+      role="contentinfo"
+    >
+      <div className="mx-auto flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <p className="text-sm text-muted-foreground">
+          © {year} {t("copyright")}
+        </p>
+        <div className="flex items-center gap-4">
+          <Link
+            className="text-sm text-muted-foreground hover:text-foreground"
+            href="/about"
+          >
+            {t("about")}
+          </Link>
+          <Link
+            className="text-sm text-muted-foreground hover:text-foreground"
+            href="/destinations"
+          >
+            {t("destinations")}
+          </Link>
+          <ModeToggle />
+          <LocaleSwitcherSelect />
+        </div>
+      </div>
+    </footer>
   );
-};
-
-export default Footer;
+}
