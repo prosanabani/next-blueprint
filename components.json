@@ -3,13 +3,16 @@
   "style": "new-york",
   "rsc": true,
   "tsx": true,
+  "rtl": true,
   "tailwind": {
     "config": "",
     "css": "src/styles/globals.css",
-    "baseColor": "blue",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": "",
-    "plugins": ["tailwindcss-animate"]
+    "plugins": [
+      "tailwindcss-animate"
+    ]
   },
   "aliases": {
     "components": "@/components",
