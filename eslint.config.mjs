@@ -143,6 +143,7 @@ export default tseslint.config(
       "sonarjs/todo-tag": "warn",
       "unicorn/prevent-abbreviations": "off",
       "unicorn/prevent-abbreviations": "off",
+      "sonarjs/no-globals-shadowing": "off",
     },
     settings: {
       react: {
