@@ -1,4 +1,4 @@
-# Hyper Next
+# Next Blueprint
 
 > A modern, production-ready Next.js starter template that gets you up and running in minutes, not hours.
 
@@ -51,8 +51,8 @@ Make sure you have one of these package managers installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/hyper-next.git
-   cd hyper-next
+   git clone https://github.com/prosanabani/next-blueprint.git
+   cd next-blueprint
    ```
 
 2. **Install dependencies**
@@ -78,7 +78,7 @@ Make sure you have one of these package managers installed:
 ## 📁 Project Structure
 
 ```
-hyper-next/
+next-blueprint/
 ├── src/
 │   ├── app/
 │   │   └── [locale]/          # Locale-based routing
