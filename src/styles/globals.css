@@ -6,13 +6,23 @@
 html {
   /* Default browser font size is 16px. making 1rem equal to 15px */
   font-size: 93.75%; /* 15px / 16px = 0.9375 or 93.75% */
+  scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Border radius scale */
+  --radius-sm: calc(
+    var(--radius) - 4px
+  ); /* small radius (4px smaller than base) */
+  --radius-md: calc(
+    var(--radius) - 2px
+  ); /* medium radius (2px smaller than base) */
+  --radius-lg: var(--radius); /* large radius (base radius) */
+  --radius-xl: calc(
+    var(--radius) + 4px
+  ); /* extra large radius (4px larger than base) */
+
+  /* Color aliases - these reference the root variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -46,28 +56,21 @@ html {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Breakpoints - based on common responsive design breakpoints */
-  --breakpoint-xs: 30rem;
-  --breakpoint-sm: 40rem;
-  --breakpoint-md: 48rem;
-  --breakpoint-lg: 64rem;
-  --breakpoint-xl: 80rem;
-  --breakpoint-2xl: 96rem;
-  --breakpoint-3xl: 120rem;
+  /* Suggested additional variables */
 
   /* Spacing scale - matches common 4px/8px base system */
-  --spacing-none: 0; /* 0px - reset/none */
-  --spacing-xs: 0.25rem; /* 4px - extra small */
-  --spacing-sm: 0.5rem; /* 8px - small */
-  --spacing-md: 0.75rem; /* 12px - medium */
-  --spacing-lg: 1rem; /* 16px - large */
-  --spacing-xl: 1.5rem; /* 24px - extra large */
-  --spacing-2xl: 2rem; /* 32px - 2x large */
-  --spacing-3xl: 3rem; /* 48px - 3x large */
-  --spacing-4xl: 4rem; /* 64px - 4x large */
-  --spacing-5xl: 5rem; /* 80px - 5x large */
-  --spacing-6xl: 6rem; /* 96px - 6x large */
-  --spacing-7xl: 7rem; /* 112px - 7x large */
+  --spacing-none: 0; /* 0px - 0 in tailwind- reset/none */
+  --spacing-xs: 0.25rem; /* 4px -1 in tailwind- extra small */
+  --spacing-sm: 0.5rem; /* 8px -2 in tailwind- small */
+  --spacing-md: 0.75rem; /* 12px -3 in tailwind- medium */
+  --spacing-lg: 1rem; /* 16px - 4 in tailwind - large */
+  --spacing-xl: 1.5rem; /* 24px - 6 in tailwind - extra large */
+  --spacing-2xl: 2rem; /* 32px -8 in tailwind- 2x large */
+  --spacing-3xl: 3rem; /* 48px -12 in tailwind- 3x large */
+  --spacing-4xl: 4rem; /* 64px -16 in tailwind- 4x large */
+  --spacing-5xl: 5rem; /* 80px -20 in tailwind- 5x large */
+  --spacing-6xl: 6rem; /* 96px -24 in tailwind- 6x large */
+  --spacing-7xl: 7rem; /* 112px -28 in tailwind- 7x large */
 
   /* Font sizes */
   --text-xs: 0.75rem;
@@ -91,10 +94,10 @@ html {
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -122,75 +125,87 @@ html {
   --container-6xl: 72rem;
   --container-7xl: 80rem;
 }
-:root {
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.623 0.214 259.815);
-  --primary-gray: oklch(0.6428 0.0152 248.06);
-  --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.623 0.214 259.815);
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+@theme {
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
 }
 
+/* Light mode – page background, body text, and base surfaces */
+:root {
+  --radius: 0.65rem; /* default border radius for components */
+  --background: oklch(1 0 0); /* page background */
+  --foreground: oklch(0.141 0.005 285.823); /* body text, headings */
+  --card: oklch(1 0 0); /* card, panel, sheet backgrounds */
+  --card-foreground: oklch(0.141 0.005 285.823); /* text on cards */
+  --popover: oklch(1 0 0); /* dropdown, popover, tooltip backgrounds */
+  --popover-foreground: oklch(0.141 0.005 285.823); /* text in popovers */
+  --primary: oklch(0.623 0.214 259.815); /* primary buttons, links, brand actions */
+  --primary-gray: oklch(0.6428 0.0152 248.06); /* gray used with primary (e.g. badges) */
+  --primary-foreground: oklch(0.97 0.014 254.604); /* text on primary buttons */
+  --secondary: oklch(0.967 0.001 286.375); /* secondary buttons, subtle backgrounds */
+  --secondary-foreground: oklch(0.21 0.006 285.885); /* text on secondary */
+  --muted: oklch(0.967 0.001 286.375); /* muted backgrounds (table stripes, disabled areas) */
+  --muted-foreground: oklch(0.552 0.016 285.938); /* placeholder, captions, helper text */
+  --accent: oklch(0.967 0.001 286.375); /* hover/active states, selected list items */
+  --accent-foreground: oklch(0.21 0.006 285.885); /* text on accent (e.g. menu hover) */
+  --destructive: oklch(0.577 0.245 27.325); /* delete, danger buttons, error states */
+  --border: oklch(0.92 0.004 286.32); /* borders, dividers */
+  --input: oklch(0.92 0.004 286.32); /* input borders, form field outlines */
+  --ring: oklch(0.623 0.214 259.815); /* focus ring (outline) color */
+  --chart-1: oklch(0.646 0.222 41.116); /* chart/data viz series 1 */
+  --chart-2: oklch(0.6 0.118 184.704); /* chart series 2 */
+  --chart-3: oklch(0.398 0.07 227.392); /* chart series 3 */
+  --chart-4: oklch(0.828 0.189 84.429); /* chart series 4 */
+  --chart-5: oklch(0.769 0.188 70.08); /* chart series 5 */
+  --sidebar: oklch(0.985 0 0); /* sidebar/navigation background */
+  --sidebar-foreground: oklch(0.141 0.005 285.823); /* sidebar text */
+  --sidebar-primary: oklch(0.623 0.214 259.815); /* sidebar active/selected item */
+  --sidebar-primary-foreground: oklch(0.97 0.014 254.604); /* text on sidebar primary */
+  --sidebar-accent: oklch(0.967 0.001 286.375); /* sidebar hover state */
+  --sidebar-accent-foreground: oklch(0.21 0.006 285.885); /* text on sidebar accent */
+  --sidebar-border: oklch(0.92 0.004 286.32); /* sidebar dividers */
+  --sidebar-ring: oklch(0.623 0.214 259.815); /* sidebar focus ring */
+}
+
+/* Dark mode – same roles as light, tuned for dark backgrounds */
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.546 0.245 262.881);
-  --primary-gray: hsl(210, 11%, 40%);
-  --primary-foreground: oklch(0.379 0.146 265.522);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.546 0.245 262.881);
-  --sidebar-primary-foreground: oklch(0.379 0.146 265.522);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --background: oklch(0.141 0.005 285.823); /* page background */
+  --foreground: oklch(0.985 0 0); /* body text, headings */
+  --card: oklch(0.21 0.006 285.885); /* card, panel, sheet backgrounds */
+  --card-foreground: oklch(0.985 0 0); /* text on cards */
+  --popover: oklch(0.21 0.006 285.885); /* dropdown, popover, tooltip backgrounds */
+  --popover-foreground: oklch(0.985 0 0); /* text in popovers */
+  --primary: oklch(0.546 0.245 262.881); /* primary buttons, links, brand actions */
+  --primary-gray: hsl(210, 11%, 40%); /* gray used with primary (e.g. badges) */
+  --primary-foreground: oklch(0.379 0.146 265.522); /* text on primary buttons */
+  --secondary: oklch(0.274 0.006 286.033); /* secondary buttons, subtle backgrounds */
+  --secondary-foreground: oklch(0.985 0 0); /* text on secondary */
+  --muted: oklch(0.274 0.006 286.033); /* muted backgrounds (table stripes, disabled areas) */
+  --muted-foreground: oklch(0.705 0.015 286.067); /* placeholder, captions, helper text */
+  --accent: oklch(0.274 0.006 286.033); /* hover/active states, selected list items */
+  --accent-foreground: oklch(0.985 0 0); /* text on accent (e.g. menu hover) */
+  --destructive: oklch(0.704 0.191 22.216); /* delete, danger buttons, error states */
+  --border: oklch(1 0 0 / 10%); /* borders, dividers */
+  --input: oklch(1 0 0 / 15%); /* input borders, form field outlines */
+  --ring: oklch(0.488 0.243 264.376); /* focus ring (outline) color */
+  --chart-1: oklch(0.488 0.243 264.376); /* chart/data viz series 1 */
+  --chart-2: oklch(0.696 0.17 162.48); /* chart series 2 */
+  --chart-3: oklch(0.769 0.188 70.08); /* chart series 3 */
+  --chart-4: oklch(0.627 0.265 303.9); /* chart series 4 */
+  --chart-5: oklch(0.645 0.246 16.439); /* chart series 5 */
+  --sidebar: oklch(0.21 0.006 285.885); /* sidebar/navigation background */
+  --sidebar-foreground: oklch(0.985 0 0); /* sidebar text */
+  --sidebar-primary: oklch(0.546 0.245 262.881); /* sidebar active/selected item */
+  --sidebar-primary-foreground: oklch(0.379 0.146 265.522); /* text on sidebar primary */
+  --sidebar-accent: oklch(0.274 0.006 286.033); /* sidebar hover state */
+  --sidebar-accent-foreground: oklch(0.985 0 0); /* text on sidebar accent */
+  --sidebar-border: oklch(1 0 0 / 10%); /* sidebar dividers */
+  --sidebar-ring: oklch(0.488 0.243 264.376); /* sidebar focus ring */
 }
 
 @layer base {
@@ -206,4 +221,42 @@ iconify-icon {
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the vertical scrollbar */
+  height: 8px; /* Height of the horizontal scrollbar */
+  background-color: var(
+    --secondary
+  ); /* Light track background, use your secondary color */
+  border-radius: var(--radius-lg); /* Match your project's border-radius */
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: var(
+    --primary
+  ); /* Use your primary brand color for the handle */
+  border-radius: var(--radius-lg); /* Match your project's border-radius */
+  border: 2px solid var(--secondary); /* Optional: a small border to make it "float" slightly */
+}
+
+/* Hover state for the scrollbar handle */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(
+    --accent
+  ); /* Change color on hover, e.g., to your accent color */
+}
+
+/* Corner of the scrollbar (where vertical and horizontal meet) */
+::-webkit-scrollbar-corner {
+  background-color: transparent; /* No background for the corner */
+}
+
+/* For Firefox: Unfortunately, extensive styling is not directly supported via CSS. */
+/* We'll use the default or a very basic style. */
+/* You can set it to auto (default) or thin. 'none' would hide it. */
+* {
+  scrollbar-width: thin; /* 'auto' or 'thin' - makes it less intrusive */
+  scrollbar-color: var(--primary) var(--secondary); /* thumb color track color */
 }

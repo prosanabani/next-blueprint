@@ -92,7 +92,6 @@ export default tseslint.config(
       // "tailwindcss/no-contradicting-classname": "warn",
       // "tailwindcss/no-unnecessary-arbitrary-value": "warn",
       // 'no-unused-vars': 'off',
-      "unicorn/prevent-abbreviations": "off",
       curly: "off",
       "no-restricted-imports": [
         "error",
