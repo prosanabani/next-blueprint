@@ -11,7 +11,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "types": ["unplugin-icons/types/react"],
     "plugins": [
@@ -30,7 +30,8 @@
     ".next/types/**/*.ts",
     "eslint.config.mjs",
     "next.config.js",
-    "src/types/**/*.d.ts"
+    "src/types/**/*.d.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
