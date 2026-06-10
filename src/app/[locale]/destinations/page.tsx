@@ -49,7 +49,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     description: t("metaDescription"),
     locale,
-    path: `${locale}/destinations`,
+    path: "destinations",
     title: t("metaTitle"),
   });
 }

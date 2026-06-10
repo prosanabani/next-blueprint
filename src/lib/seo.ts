@@ -9,6 +9,7 @@ import {
   siteTagline,
   siteUrl,
 } from "@/config/site";
+import { localizedPath, supportedLocales } from "@/i18n/shared";
 import { type Metadata } from "next";
 
 /**
@@ -24,15 +25,15 @@ export type PageMetaInput = {
    */
   imagePath?: string;
   /**
-   * Optional locale for alternates.
+   * Locale for canonical URL and alternates.
    */
-  locale?: string;
+  locale: string;
   /**
    * Optional noindex for this page.
    */
   noIndex?: boolean;
   /**
-   * Optional path (no leading slash) for canonical and OG URL.
+   * Path without locale prefix (e.g. "about", "destinations/penang").
    */
   path?: string;
   /**
@@ -42,23 +43,43 @@ export type PageMetaInput = {
 };
 
 /**
+ * Build absolute URL for a locale-aware path.
+ */
+export function buildLocalizedUrl(path: string, locale: string): string {
+  const localized = localizedPath(path, locale);
+  return localized === "/" ? siteUrl : `${siteUrl}${localized}`;
+}
+
+/**
+ * Build hreflang alternates for all supported locales.
+ */
+export function buildLanguageAlternates(path = ""): Record<string, string> {
+  return Object.fromEntries(
+    supportedLocales.map((locale) => [locale, buildLocalizedUrl(path, locale)]),
+  );
+}
+
+/**
  * Build Next.js Metadata for a page (title, description, openGraph, twitter, alternates).
  * Use in generateMetadata() for SSG/SSR pages.
  */
 export function buildPageMetadata(input: PageMetaInput): Metadata {
   const { description, imagePath, locale, noIndex, path = "", title } = input;
-  const canonical = path ? canonicalUrl(path) : undefined;
+  const canonical = buildLocalizedUrl(path, locale);
   const image = ogImageUrl(imagePath);
 
   return {
     description,
     title,
     ...(noIndex && { robots: { follow: false, index: false } }),
-    alternates: canonical ? { canonical } : undefined,
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates(path),
+    },
     openGraph: {
       description,
       images: [{ alt: title, height: 630, url: image, width: 1_200 }],
-      locale: locale ?? undefined,
+      locale: locale === "ar" ? "ar_SA" : "en_US",
       siteName,
       title,
       type: "website",
@@ -127,16 +148,15 @@ export function buildWebSiteJsonLd(locale: string) {
       "query-input": "required name=search_term_string",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/${locale}/search?q={search_term_string}`,
+        urlTemplate: `${buildLocalizedUrl("search", locale)}?q={search_term_string}`,
       },
     },
-    url: canonicalUrl(locale),
+    url: buildLocalizedUrl("", locale),
   };
 }
 
 /**
- * Build canonical URL for a path (e.g. "en/about" or "ar/destinations/penang").
- * Use for Metadata.alternates.canonical and JSON-LD.
+ * @deprecated Use buildLocalizedUrl(path, locale) instead.
  */
 export function canonicalUrl(path = ""): string {
   if (path.startsWith("http")) return path;

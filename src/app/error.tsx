@@ -9,18 +9,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
+import { defaultLocale, LOCALE_COOKIE } from "@/i18n/config";
+import { getLocaleFromPathname } from "@/i18n/shared";
 import { getErrorMessages } from "@/lib/error-messages";
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-type Locale = "ar" | "en";
-
 export default function Error({ reset }: { readonly reset: () => void }) {
-  const [locale, setLocale] = useState<Locale>("en");
+  const [locale, setLocale] = useState<string>(defaultLocale);
 
   useEffect(() => {
     const path = typeof window === "undefined" ? "" : window.location.pathname;
-    setLocale(getLocaleFromPathname(path));
+    const cookieMatch = document.cookie.match(
+      new RegExp(`(?:^|;\\s*)${LOCALE_COOKIE}=([^;]+)`),
+    );
+    setLocale(getLocaleFromPathname(path, cookieMatch?.[1]));
   }, []);
 
   const t = getErrorMessages(locale);
@@ -61,8 +64,4 @@ export default function Error({ reset }: { readonly reset: () => void }) {
       </div>
     </div>
   );
-}
-
-function getLocaleFromPathname(pathname: string): Locale {
-  return pathname.startsWith("/ar") ? "ar" : "en";
 }

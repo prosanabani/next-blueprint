@@ -1,5 +1,10 @@
 import { getDestinationBySlug } from "@/data/destinations";
-import { buildPageMetadata, buildPlaceJsonLd, canonicalUrl } from "@/lib/seo";
+import {
+  buildLocalizedUrl,
+  buildPageMetadata,
+  buildPlaceJsonLd,
+  ogImageUrl,
+} from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
@@ -15,11 +20,11 @@ export default async function DestinationPage({
   const t = await getTranslations("DestinationsPage");
   const name = t(destination.nameKey);
   const description = t(destination.descriptionKey);
-  const url = canonicalUrl(`${locale}/destinations/${slug}`);
+  const url = buildLocalizedUrl(`destinations/${slug}`, locale);
   const jsonLd = buildPlaceJsonLd({
     description,
     image: destination.imagePath
-      ? canonicalUrl(destination.imagePath)
+      ? ogImageUrl(destination.imagePath)
       : undefined,
     name,
     url,
@@ -58,7 +63,7 @@ export async function generateMetadata({
     description,
     imagePath: destination.imagePath,
     locale,
-    path: `${locale}/destinations/${slug}`,
+    path: `destinations/${slug}`,
     title: name,
   });
 }

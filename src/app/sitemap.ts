@@ -6,6 +6,7 @@
 import { siteUrl } from "@/config/site";
 import { destinationSlugs } from "@/data/destinations";
 import { routing } from "@/i18n/routing";
+import { buildLocalizedUrl } from "@/lib/seo";
 import { type MetadataRoute } from "next";
 
 const changeFrequency = "weekly" as const;
@@ -17,12 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const locale of routing.locales) {
     for (const path of basePaths) {
-      const url = path ? `${siteUrl}/${locale}/${path}` : `${siteUrl}/${locale}`;
       entries.push({
         changeFrequency,
         lastModified: new Date(),
         priority: path ? priority : 1,
-        url,
+        url: buildLocalizedUrl(path, locale),
       });
     }
 
@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency,
         lastModified: new Date(),
         priority: 0.7,
-        url: `${siteUrl}/${locale}/destinations/${slug}`,
+        url: buildLocalizedUrl(`destinations/${slug}`, locale),
       });
     }
   }

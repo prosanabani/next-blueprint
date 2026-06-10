@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { isRtlLocale } from "@/i18n/shared";
+import { useLayoutEffect } from "react";
 
 type Props = {
   readonly fontClassName: string;
@@ -8,15 +9,15 @@ type Props = {
 };
 
 /**
- * Sets lang, dir, and font class on the document element so the root layout
- * can stay minimal while [locale] still controls these attributes.
+ * Applies font class on <html> after locale attributes are set server-side via inline script.
  */
 export function LocaleDocumentAttributes({ fontClassName, locale }: Props) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = document.documentElement;
     element.lang = locale;
-    element.dir = locale === "ar" ? "rtl" : "ltr";
+    element.dir = isRtlLocale(locale) ? "rtl" : "ltr";
     element.className = fontClassName;
   }, [fontClassName, locale]);
+
   return null;
 }

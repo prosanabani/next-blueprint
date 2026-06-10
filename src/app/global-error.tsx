@@ -2,11 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import "@/styles/globals.css";
+import { defaultLocale, LOCALE_COOKIE } from "@/i18n/config";
+import {
+  getLocaleFromPathname,
+  isRtlLocale,
+  localizedPath,
+} from "@/i18n/shared";
 import { getGlobalErrorMessages } from "@/lib/error-messages";
 import { Home, RefreshCw, ServerCrash } from "lucide-react";
 import { useEffect, useState } from "react";
-
-type Locale = "ar" | "en";
 
 export default function GlobalError({
   error,
@@ -15,23 +19,26 @@ export default function GlobalError({
   readonly error: Error & { digest?: string };
   readonly reset: () => void;
 }) {
-  const [locale, setLocale] = useState<Locale>("en");
+  const [locale, setLocale] = useState<string>(defaultLocale);
 
   useEffect(() => {
     const path =
       typeof window === "undefined" ? "" : window.location.pathname;
-    const nextLocale = getLocaleFromPathname(path);
+    const cookieMatch = document.cookie.match(
+      new RegExp(`(?:^|;\\s*)${LOCALE_COOKIE}=([^;]+)`),
+    );
+    const nextLocale = getLocaleFromPathname(path, cookieMatch?.[1]);
     setLocale(nextLocale);
     const root = document.documentElement;
     root.lang = nextLocale;
-    root.dir = nextLocale === "ar" ? "rtl" : "ltr";
+    root.dir = isRtlLocale(nextLocale) ? "rtl" : "ltr";
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (isDark) root.classList.add("dark");
     else root.classList.remove("dark");
   }, []);
 
   const t = getGlobalErrorMessages(locale);
-  const homeHref = locale === "ar" ? "/ar" : "/en";
+  const homeHref = localizedPath("", locale);
 
   return (
     <html suppressHydrationWarning>
@@ -91,8 +98,4 @@ export default function GlobalError({
       </body>
     </html>
   );
-}
-
-function getLocaleFromPathname(pathname: string): Locale {
-  return pathname.startsWith("/ar") ? "ar" : "en";
 }

@@ -79,5 +79,15 @@
     "goToHomepage": "Go to Homepage",
     "contactSupport": "If the problem persists, please contact support.",
     "errorId": "Error ID"
+  },
+  "LanguageBanner": {
+    "ariaLabel": "Language suggestion",
+    "message": "This page is available in {language}.",
+    "switch": "Switch",
+    "dismiss": "Dismiss",
+    "languages": {
+      "en": "English",
+      "ar": "Arabic"
+    }
   }
 }

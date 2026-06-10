@@ -3,22 +3,25 @@
  * Centralize here so metadata and Open Graph stay consistent across the app.
  */
 
+import {
+  defaultLocale,
+  supportedLocales,
+  type Locale,
+} from "@/i18n/config";
+
 /**
  * Base URL of the site (no trailing slash). Use env in production.
  */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
-/**
- * Supported locales; must match i18n routing.
- */
-export const siteLocales = ["en", "ar"] as const;
-export type SiteLocale = (typeof siteLocales)[number];
+/** Supported locales; driven by NEXT_PUBLIC_LOCALES. */
+export const siteLocales = supportedLocales;
 
-/**
- * Default locale for canonical URLs when no locale is preferred.
- */
-export const defaultLocale: SiteLocale = "ar";
+export type SiteLocale = Locale;
+
+/** Default locale (no URL prefix); driven by NEXT_PUBLIC_DEFAULT_LOCALE. */
+export { defaultLocale };
 
 /**
  * Site name for titles and branding.

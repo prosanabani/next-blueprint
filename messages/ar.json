@@ -79,5 +79,15 @@
     "goToHomepage": "الذهاب إلى الصفحة الرئيسية",
     "contactSupport": "إذا استمرت المشكلة، يرجى التواصل مع الدعم.",
     "errorId": "معرف الخطأ"
+  },
+  "LanguageBanner": {
+    "ariaLabel": "اقتراح اللغة",
+    "message": "هذه الصفحة متاحة باللغة {language}.",
+    "switch": "تبديل",
+    "dismiss": "إغلاق",
+    "languages": {
+      "en": "الإنجليزية",
+      "ar": "العربية"
+    }
   }
 }

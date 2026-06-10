@@ -11,11 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { type Locale, useLocale, useTranslations } from "next-intl";
+import { supportedLocales } from "@/i18n/shared";
+import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
-import * as React from "react";
-
-const SUPPORTED_LOCALES: Locale[] = ["en", "ar"];
 
 export default function LocaleSwitcherSelect() {
   const t = useTranslations("HomePage");
@@ -26,7 +24,7 @@ export default function LocaleSwitcherSelect() {
 
   function onLocaleChange(nextLocale: string) {
     startTransition(() => {
-      router.replace({ pathname }, { locale: nextLocale as Locale });
+      router.replace({ pathname }, { locale: nextLocale });
     });
   }
 
@@ -41,7 +39,7 @@ export default function LocaleSwitcherSelect() {
         <DropdownMenuLabel>{t("language")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup onValueChange={onLocaleChange} value={locale}>
-          {SUPPORTED_LOCALES.map((loc) => (
+          {supportedLocales.map((loc) => (
             <DropdownMenuRadioItem key={loc} value={loc}>
               {loc.toUpperCase()}
             </DropdownMenuRadioItem>

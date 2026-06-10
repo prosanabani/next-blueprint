@@ -29,7 +29,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     description: t("metaDescription"),
     locale,
-    path: `${locale}/about`,
+    path: "about",
     title: t("metaTitle"),
   });
 }

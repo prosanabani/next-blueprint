@@ -1,10 +1,16 @@
 import Footer from "./components/Footer";
+import LanguageSuggestionBanner from "./components/LanguageSuggestionBanner";
 import { LocaleDocumentAttributes } from "./components/LocaleDocumentAttributes";
 import Nav from "./components/Nav";
 import { DirectionProvider } from "@/components/ui/direction";
 import { siteName, siteTagline, siteUrl } from "@/config/site";
 import { routing } from "@/i18n/routing";
-import { buildWebSiteJsonLd, canonicalUrl } from "@/lib/seo";
+import { isRtlLocale } from "@/i18n/shared";
+import {
+  buildLanguageAlternates,
+  buildLocalizedUrl,
+  buildWebSiteJsonLd,
+} from "@/lib/seo";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -28,15 +34,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = canonicalUrl(locale); // e.g. https://site.com/en
+  const baseUrl = buildLocalizedUrl("", locale);
 
   return {
     alternates: {
       canonical: baseUrl,
-      languages: {
-        ar: canonicalUrl("ar"),
-        en: canonicalUrl("en"),
-      },
+      languages: buildLanguageAlternates(""),
     },
     description: siteTagline,
     metadataBase: new URL(siteUrl),
@@ -84,11 +87,21 @@ export default async function LocaleLayout({
   }
 
   const jsonLd = buildWebSiteJsonLd(locale);
-  const fontClassName =
-    locale === "ar" ? notoSansArabic.className : GeistSans.className;
+  const fontClassName = isRtlLocale(locale)
+    ? notoSansArabic.className
+    : GeistSans.className;
+
+  const direction = isRtlLocale(locale) ? "rtl" : "ltr";
 
   return (
     <>
+      {/* Set lang/dir before paint to avoid hydration flash */}
+      <script
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.lang=${JSON.stringify(locale)};document.documentElement.dir=${JSON.stringify(direction)};`,
+        }}
+      />
       <LocaleDocumentAttributes
         fontClassName={fontClassName}
         locale={locale}
@@ -105,9 +118,10 @@ export default async function LocaleLayout({
         disableTransitionOnChange
         enableSystem
       >
-        <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
+        <DirectionProvider dir={isRtlLocale(locale) ? "rtl" : "ltr"}>
           <NextIntlClientProvider>
             <div className="flex min-h-screen flex-col">
+              <LanguageSuggestionBanner />
               <Nav />
               <main className="flex-1">{children}</main>
               <Footer />
