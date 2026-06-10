@@ -58,20 +58,6 @@ html {
 
   /* Suggested additional variables */
 
-  /* Spacing scale - matches common 4px/8px base system */
-  --spacing-none: 0; /* 0px - 0 in tailwind- reset/none */
-  --spacing-xs: 0.25rem; /* 4px -1 in tailwind- extra small */
-  --spacing-sm: 0.5rem; /* 8px -2 in tailwind- small */
-  --spacing-md: 0.75rem; /* 12px -3 in tailwind- medium */
-  --spacing-lg: 1rem; /* 16px - 4 in tailwind - large */
-  --spacing-xl: 1.5rem; /* 24px - 6 in tailwind - extra large */
-  --spacing-2xl: 2rem; /* 32px -8 in tailwind- 2x large */
-  --spacing-3xl: 3rem; /* 48px -12 in tailwind- 3x large */
-  --spacing-4xl: 4rem; /* 64px -16 in tailwind- 4x large */
-  --spacing-5xl: 5rem; /* 80px -20 in tailwind- 5x large */
-  --spacing-6xl: 6rem; /* 96px -24 in tailwind- 6x large */
-  --spacing-7xl: 7rem; /* 112px -28 in tailwind- 7x large */
-
   /* Font sizes */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
