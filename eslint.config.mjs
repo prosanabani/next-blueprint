@@ -11,8 +11,8 @@ import nextjs from "@next/eslint-plugin-next";
 
 export default tseslint.config(
   // Next.js flat config (so Next detects the plugin)
-  nextjs.flatConfig.recommended,
-  nextjs.flatConfig.coreWebVitals,
+  nextjs.configs.recommended,
+  nextjs.configs["core-web-vitals"],
   {
     files: ["**/*.{ts,tsx}"],
     rules: {
