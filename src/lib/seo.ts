@@ -33,7 +33,7 @@ export type PageMetaInput = {
    */
   noIndex?: boolean;
   /**
-   * Path without locale prefix (e.g. "about", "destinations/penang").
+   * Path without locale prefix (e.g. "" for home, "blog/my-post").
    */
   path?: string;
   /**
@@ -91,25 +91,6 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       images: [image],
       title,
     },
-  };
-}
-
-/**
- * JSON-LD: Place schema for destination pages.
- */
-export function buildPlaceJsonLd(parameters: {
-  description: string;
-  image?: string;
-  name: string;
-  url: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    description: parameters.description,
-    name: parameters.name,
-    url: parameters.url,
-    ...(parameters.image && { image: parameters.image }),
   };
 }
 

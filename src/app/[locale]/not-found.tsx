@@ -1,7 +1,7 @@
 import { GoBackButton } from "./components/GoBackButton";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { Compass, Home, MapPin } from "lucide-react";
+import { Home, MapPin } from "lucide-react";
 import { type Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -55,27 +55,6 @@ export default async function NotFound() {
             </div>
           </div>
         </div>
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          {t("tryTheseInstead")}
-        </p>
-        <nav
-          aria-label={t("quickLinksAriaLabel")}
-          className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm"
-        >
-          <Link
-            className="inline-flex items-center gap-1.5 text-primary hover:underline"
-            href="/about"
-          >
-            <Compass className="h-4 w-4" />
-            {t("about")}
-          </Link>
-          <Link
-            className="inline-flex items-center gap-1.5 text-primary hover:underline"
-            href="/destinations"
-          >
-            {t("destinations")}
-          </Link>
-        </nav>
       </div>
     </div>
   );

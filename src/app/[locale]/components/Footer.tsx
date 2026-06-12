@@ -3,9 +3,8 @@
 import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 import { ModeToggle } from "./ModeToggle";
 /**
- * Site footer: copyright, optional links, theme/locale toggles.
+ * Site footer: copyright, theme/locale toggles.
  */
-import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
@@ -22,18 +21,6 @@ export default function Footer() {
           © {year} {t("copyright")}
         </p>
         <div className="flex items-center gap-4">
-          <Link
-            className="text-sm text-muted-foreground hover:text-foreground"
-            href="/about"
-          >
-            {t("about")}
-          </Link>
-          <Link
-            className="text-sm text-muted-foreground hover:text-foreground"
-            href="/destinations"
-          >
-            {t("destinations")}
-          </Link>
           <ModeToggle />
           <LocaleSwitcherSelect />
         </div>

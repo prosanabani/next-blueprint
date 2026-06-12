@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
 import { buildPageMetadata } from "@/lib/seo";
-import { CircleChevronRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 /**
@@ -34,17 +31,6 @@ export default async function HomePage() {
           {t("title")}
         </h1>
         <p className="mx-auto text-lg text-muted-foreground">{t("tagline")}</p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Button asChild size="lg">
-            <Link href="/destinations">
-              <CircleChevronRight aria-hidden className="size-5" />
-              {t("ctaDestinations")}
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/about">{t("about")}</Link>
-          </Button>
-        </div>
       </section>
 
       {/* Short intro */}
