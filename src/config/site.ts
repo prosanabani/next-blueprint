@@ -3,11 +3,7 @@
  * Centralize here so metadata and Open Graph stay consistent across the app.
  */
 
-import {
-  defaultLocale,
-  supportedLocales,
-  type Locale,
-} from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 
 /**
  * Base URL of the site (no trailing slash). Use env in production.
@@ -15,13 +11,15 @@ import {
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
-/** Supported locales; driven by NEXT_PUBLIC_LOCALES. */
-export const siteLocales = supportedLocales;
+/**
+ * Supported locales; driven by NEXT_PUBLIC_LOCALES.
+ */
 
 export type SiteLocale = Locale;
 
-/** Default locale (no URL prefix); driven by NEXT_PUBLIC_DEFAULT_LOCALE. */
-export { defaultLocale };
+/**
+ * Default locale (no URL prefix); driven by NEXT_PUBLIC_DEFAULT_LOCALE.
+ */
 
 /**
  * Site name for titles and branding.
@@ -46,3 +44,5 @@ export const socialLinks = {
   // twitter: "https://twitter.com/...",
   // facebook: "https://facebook.com/...",
 } as const;
+
+export { defaultLocale, supportedLocales as siteLocales } from "@/i18n/config";

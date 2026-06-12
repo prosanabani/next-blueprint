@@ -1,6 +1,5 @@
 import { routing } from "./routing";
 import {
-  defaultLocale,
   getCurrentLocale,
   LOCALE_COOKIE,
   parseLocaleCookie,
@@ -10,21 +9,23 @@ import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { cookies, headers } from "next/headers";
 
+async function loadMessages(locale: string) {
+  return (await import(`../../messages/${locale}.json`)).default;
+}
+
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const headerStore = await headers();
   const pathname = headerStore.get("x-pathname") ?? "";
   const cookieStore = await cookies();
-  const cookieLocale = parseLocaleCookie(
-    cookieStore.get(LOCALE_COOKIE)?.value,
-  );
+  const cookieLocale = parseLocaleCookie(cookieStore.get(LOCALE_COOKIE)?.value);
 
   // Ignored paths (e.g. /dashboard): locale from cookie, not URL
   if (pathname && shouldIgnorePath(pathname)) {
-    const locale = getCurrentLocale(pathname, cookieLocale);
+    const ignoredPathLocale = getCurrentLocale(pathname, cookieLocale);
     return {
-      locale,
-      messages: (await import(`../../messages/${locale}.json`)).default,
+      locale: ignoredPathLocale,
+      messages: await loadMessages(ignoredPathLocale),
     };
   }
 
@@ -34,6 +35,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    messages: await loadMessages(locale),
   };
 });

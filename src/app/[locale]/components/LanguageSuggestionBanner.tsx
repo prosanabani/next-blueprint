@@ -2,39 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { supportedLocales, type Locale } from "@/i18n/shared";
+import { type Locale, supportedLocales } from "@/i18n/shared";
 import { Globe, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState, useTransition } from "react";
 
 const DISMISS_KEY = "locale-banner-dismissed";
-
-function getBrowserPreferredLocale(): Locale | undefined {
-  if (typeof navigator === "undefined") {
-    return undefined;
-  }
-
-  for (const tag of navigator.languages) {
-    const normalized = tag.toLowerCase();
-    const base = normalized.split("-")[0] ?? normalized;
-
-    const exact = supportedLocales.find(
-      (locale) => locale.toLowerCase() === normalized,
-    );
-    if (exact) {
-      return exact;
-    }
-
-    const partial = supportedLocales.find(
-      (locale) => locale.toLowerCase() === base,
-    );
-    if (partial) {
-      return partial;
-    }
-  }
-
-  return undefined;
-}
 
 export default function LanguageSuggestionBanner() {
   const t = useTranslations("LanguageBanner");
@@ -80,9 +53,9 @@ export default function LanguageSuggestionBanner() {
 
   return (
     <div
+      aria-label={t("ariaLabel")}
       className="border-b border-border bg-muted/60 px-4 py-2"
       role="region"
-      aria-label={t("ariaLabel")}
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
         <p className="flex items-center gap-2 text-sm text-foreground">
@@ -106,4 +79,31 @@ export default function LanguageSuggestionBanner() {
       </div>
     </div>
   );
+}
+
+function getBrowserPreferredLocale(): Locale | undefined {
+  if (typeof navigator === "undefined") {
+    return undefined;
+  }
+
+  for (const tag of navigator.languages) {
+    const normalized = tag.toLowerCase();
+    const base = normalized.split("-")[0] ?? normalized;
+
+    const exact = supportedLocales.find(
+      (locale) => locale.toLowerCase() === normalized,
+    );
+    if (exact) {
+      return exact;
+    }
+
+    const partial = supportedLocales.find(
+      (locale) => locale.toLowerCase() === base,
+    );
+    if (partial) {
+      return partial;
+    }
+  }
+
+  return undefined;
 }

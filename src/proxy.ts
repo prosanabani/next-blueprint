@@ -1,6 +1,3 @@
-import { type NextRequest, NextResponse } from "next/server";
-import createMiddleware from "next-intl/middleware";
-
 import { routing } from "./i18n/routing";
 import {
   extractLocaleFromPath,
@@ -8,16 +5,10 @@ import {
   shouldIgnorePath,
   stripLocalePrefix,
 } from "./i18n/shared";
+import createMiddleware from "next-intl/middleware";
+import { type NextRequest, NextResponse } from "next/server";
 
 const handleI18nRouting = createMiddleware(routing);
-
-function setLocaleCookie(response: NextResponse, locale: string) {
-  response.cookies.set(LOCALE_COOKIE, locale, {
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-    sameSite: "lax",
-  });
-}
 
 export default function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
@@ -31,27 +22,35 @@ export default function proxy(request: NextRequest) {
   }
 
   if (shouldIgnorePath(pathname)) {
-    const response = NextResponse.next();
-    response.headers.set("x-pathname", pathname);
-    return response;
+    const ignoredPathResponse = NextResponse.next();
+    ignoredPathResponse.headers.set("x-pathname", pathname);
+    return ignoredPathResponse;
   }
 
-  const response = handleI18nRouting(request);
+  const i18nResponse = handleI18nRouting(request);
 
   // Sync locale cookie when user visits an explicitly prefixed URL
   const urlLocale = extractLocaleFromPath(pathname);
-  if (urlLocale && response instanceof NextResponse) {
+  if (urlLocale && i18nResponse instanceof NextResponse) {
     const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
     if (urlLocale !== cookieLocale) {
-      setLocaleCookie(response, urlLocale);
+      setLocaleCookie(i18nResponse, urlLocale);
     }
   }
 
-  if (response instanceof NextResponse) {
-    response.headers.set("x-pathname", pathname);
+  if (i18nResponse instanceof NextResponse) {
+    i18nResponse.headers.set("x-pathname", pathname);
   }
 
-  return response;
+  return i18nResponse;
+}
+
+function setLocaleCookie(response: NextResponse, locale: string) {
+  response.cookies.set(LOCALE_COOKIE, locale, {
+    maxAge: 60 * 60 * 24 * 365,
+    path: "/",
+    sameSite: "lax",
+  });
 }
 
 export const config = {

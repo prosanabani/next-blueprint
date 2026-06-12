@@ -2,11 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import "@/styles/globals.css";
-import { defaultLocale, LOCALE_COOKIE } from "@/i18n/config";
+import { defaultLocale } from "@/i18n/config";
 import {
   getLocaleFromPathname,
   isRtlLocale,
   localizedPath,
+  readLocaleFromDocumentCookie,
 } from "@/i18n/shared";
 import { getGlobalErrorMessages } from "@/lib/error-messages";
 import { Home, RefreshCw, ServerCrash } from "lucide-react";
@@ -22,12 +23,10 @@ export default function GlobalError({
   const [locale, setLocale] = useState<string>(defaultLocale);
 
   useEffect(() => {
-    const path =
-      typeof window === "undefined" ? "" : window.location.pathname;
-    const cookieMatch = document.cookie.match(
-      new RegExp(`(?:^|;\\s*)${LOCALE_COOKIE}=([^;]+)`),
+    const nextLocale = getLocaleFromPathname(
+      window.location.pathname,
+      readLocaleFromDocumentCookie(),
     );
-    const nextLocale = getLocaleFromPathname(path, cookieMatch?.[1]);
     setLocale(nextLocale);
     const root = document.documentElement;
     root.lang = nextLocale;
@@ -38,7 +37,7 @@ export default function GlobalError({
   }, []);
 
   const t = getGlobalErrorMessages(locale);
-  const homeHref = localizedPath("", locale);
+  const homeHref = localizedPath(locale);
 
   return (
     <html suppressHydrationWarning>

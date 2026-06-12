@@ -43,20 +43,20 @@ export type PageMetaInput = {
 };
 
 /**
- * Build absolute URL for a locale-aware path.
- */
-export function buildLocalizedUrl(path: string, locale: string): string {
-  const localized = localizedPath(path, locale);
-  return localized === "/" ? siteUrl : `${siteUrl}${localized}`;
-}
-
-/**
  * Build hreflang alternates for all supported locales.
  */
 export function buildLanguageAlternates(path = ""): Record<string, string> {
   return Object.fromEntries(
     supportedLocales.map((locale) => [locale, buildLocalizedUrl(path, locale)]),
   );
+}
+
+/**
+ * Build absolute URL for a locale-aware path.
+ */
+export function buildLocalizedUrl(path: string, locale: string): string {
+  const localized = localizedPath(locale, path);
+  return localized === "/" ? siteUrl : `${siteUrl}${localized}`;
 }
 
 /**

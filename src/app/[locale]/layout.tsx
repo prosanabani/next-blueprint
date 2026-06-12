@@ -102,10 +102,7 @@ export default async function LocaleLayout({
           __html: `document.documentElement.lang=${JSON.stringify(locale)};document.documentElement.dir=${JSON.stringify(direction)};`,
         }}
       />
-      <LocaleDocumentAttributes
-        fontClassName={fontClassName}
-        locale={locale}
-      />
+      <LocaleDocumentAttributes fontClassName={fontClassName} locale={locale} />
       {/* JSON-LD for SEO: WebSite schema (valid in body per spec). */}
       <script
         // eslint-disable-next-line react/no-danger
