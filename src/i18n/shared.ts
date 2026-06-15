@@ -8,6 +8,18 @@ import {
 } from "./config";
 
 /**
+ * Extract the locale cookie value from a document.cookie string.
+ */
+export function extractLocaleCookieValue(
+  cookieString: string,
+): string | undefined {
+  const match = new RegExp(`(?:^|;\\s*)${LOCALE_COOKIE}=([^;]+)`, "u").exec(
+    cookieString,
+  );
+  return match?.[1];
+}
+
+/**
  * Extract a non-default locale prefix from a pathname, e.g. "/en/about" → "en".
  */
 export function extractLocaleFromPath(pathname: string): Locale | null {

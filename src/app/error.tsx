@@ -9,10 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { defaultLocale } from "@/i18n/config";
-import { Link } from "@/i18n/navigation";
 import {
+  extractLocaleCookieValue,
   getLocaleFromPathname,
-  readLocaleFromDocumentCookie,
+  localizedPath,
 } from "@/i18n/shared";
 import { getErrorMessages } from "@/lib/error-messages";
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
@@ -22,11 +22,9 @@ export default function Error({ reset }: { readonly reset: () => void }) {
   const [locale, setLocale] = useState<string>(defaultLocale);
 
   useEffect(() => {
+    const path = window.location.pathname;
     setLocale(
-      getLocaleFromPathname(
-        window.location.pathname,
-        readLocaleFromDocumentCookie(),
-      ),
+      getLocaleFromPathname(path, extractLocaleCookieValue(document.cookie)),
     );
   }, []);
 
@@ -54,14 +52,14 @@ export default function Error({ reset }: { readonly reset: () => void }) {
           </CardContent>
           <CardFooter className="flex flex-col gap-3 sm:flex-row sm:justify-center p-6 pt-4">
             <Button onClick={reset} size="lg">
-              <RefreshCw className="mr-2 h-4 w-4" />
+              <RefreshCw className="me-2 h-4 w-4" />
               {t.tryAgain}
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/">
-                <Home className="mr-2 h-4 w-4" />
+              <a href={localizedPath(locale)}>
+                <Home className="me-2 h-4 w-4" />
                 {t.goToHomepage}
-              </Link>
+              </a>
             </Button>
           </CardFooter>
         </Card>
